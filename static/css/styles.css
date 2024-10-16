@@ -1,0 +1,203 @@
+/* 色彩方案 */
+:root {
+    --primary-color: #ff69b4; /* 粉色 */
+    --secondary-color: #f06; /* 亮粉色 */
+    --accent-color: #d3d3d3; /* 灰色 */
+    --text-color: #333;
+    --background-color: #f8f8f8; /* 浅灰色背景 */
+    --border-color: #e0e0e0; /* 边框颜色 */
+    --success-color: #4CAF50; /* 成功颜色 */
+    --error-color: #f44336; /* 错误颜色 */
+}
+
+/* 字体 */
+body, html {
+    font-family: 'Open Sans', 'Arial', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    line-height: 1.6; /* 提高行高，增加可读性 */
+    background-image: url('/static/1.jpg');
+    background-size: cover; /* 确保图片覆盖整个页面 */
+    background-position: center; /* 将图片居中显示 */
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加阴影深度 */
+    overflow: hidden; /* 清除内部浮动 */
+}
+
+header h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 300; /* 减轻字体粗细 */
+}
+
+.avatar-creator {
+    position: relative; /* 设置为相对定位 */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#loadingText {
+    position: absolute; /* 绝对定位 */
+    left: 0; /* 放置在容器的左边 */
+    top: 50%; /* 垂直居中 */
+    transform: translateY(-50%); /* 精确垂直居中 */
+    display: none; /* 默认不显示 */
+}
+
+#avatar-canvas {
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+}
+
+#customization-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 左对齐 */
+    margin-bottom: 20px;
+}
+
+#customization-form > label {
+    margin-bottom: 5px; /* 减少标签和输入框之间的间距 */
+    font-weight: 500; /* 增加标签字体粗细 */
+}
+
+#customization-form > select, #customization-form > textarea {
+    margin-bottom: 15px; /* 增加元素之间的间距 */
+    padding: 10px; /* 增加内边距 */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    transition: border-color 0.3s ease; /* 边框颜色变化过渡 */
+}
+
+#customization-form > select:focus, #customization-form > textarea:focus {
+    border-color: var(--primary-color); /* 聚焦时边框颜色变化 */
+}
+
+#prompt, #negative_prompt {
+    margin-bottom: 15px; /* 增加元素之间的间距 */
+    padding: 10px; /* 增加内边距 */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    transition: border-color 0.3s ease; /* 边框颜色变化过渡 */
+}
+
+#prompt:focus, #negative_prompt:focus {
+    border-color: var(--primary-color); /* 聚焦时边框颜色变化 */
+}
+
+button {
+    padding: 12px 25px; /* 增加按钮大小 */
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.1s ease; /* 添加变换过渡 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 添加按钮阴影 */
+    outline: none; /* 移除聚焦轮廓 */
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px); /* 鼠标悬停时上移 */
+}
+
+button:active {
+    transform: translateY(0); /* 点击时恢复原位 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* 点击时阴影变小 */
+}
+
+.chat-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--accent-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加阴影深度 */
+    width: 100%;
+}
+
+#chat-messages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* 显示错误信息的样式 */
+#chat-messages li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #f7f7f7;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+/* 错误信息 */
+.error-message {
+    color: var(--error-color);
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* 新增喜欢和不喜欢按钮的样式 */
+.button-container {
+    display: flex;
+    justify-content: space-around; /* 使按钮分布在容器的两侧 */
+    margin-bottom: 20px;
+}
+
+#like-button, #dislike-button {
+    padding: 12px 25px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease, transform 0.1s ease; /* 添加变换过渡 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 添加按钮阴影 */
+}
+
+#like-button {
+    background-color: var(--success-color); /* 喜欢按钮的颜色 */
+}
+
+#dislike-button {
+    background-color: var(--error-color); /* 不喜欢按钮的颜色 */
+}
+
+#like-button:hover, #dislike-button:hover {
+    transform: translateY(-2px); /* 鼠标悬停时上移 */
+}
+
+#like-button:active, #dislike-button:active {
+    transform: translateY(0); /* 点击时恢复原位 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* 点击时阴影变小 */
+}
+
+
+
+

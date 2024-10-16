@@ -1,0 +1,76 @@
+<!DOCTYPE html> <!-- 声明文档类型为HTML5 -->
+<html lang="en"> <!-- 设置页面语言为英语 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 设置视口，确保页面在移动设备上正确显示 -->
+    <meta name="description" content="Customize your own AI avatar and chat with AI."> <!-- 设置页面描述 -->
+    <title>AI Avatar Customization</title> <!-- 设置页面标题 -->
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> <!-- 引入CSS样式表 -->
+</head>
+<body>
+    <div class="container"> <!-- 容器，用于包裹页面内容 -->
+        <header> <!-- 头部区域 -->
+            <h1>Customize Your Avatar</h1> <!-- 主标题 -->
+        </header>
+        <!-- 提示词示例 -->
+        <section class="prompt-examples">
+            <p>提示词示例：</p>
+            <ul>
+                <li>1. The ancient battlefield, thousands of troops and horses to fight, the situation is very fierce, countless casualties</li>
+                <li>2. Photo of grass field with a cute little house with a pink roof and blue eaves, there are 2 sheeps at far away, in the background is a blue sky and white clouds, in the style of light orange, in the style of Nintendo, with smooth edges, like 3D cartoon game art, with colorful animated stills, with soft lighting, from a high angle view</li>
+                <li>3. The scene consists of three pandas arranged in a composition, each representing a member of a trio.</li>
+                <li>4. A beautiful girl with flowers and a bottle of perfume, in the style of art nouveau-inspired illustrations, dark gold and sky-blue, Michael Martchenko, Naoko Takeuchi, dark cyan and red, Patricia Polacco, colorful dreams</li>
+            </ul>
+        </section>
+        <!-- 定制头像部分 -->
+        <section class="avatar-creator">
+            <div id="loadingText" style="display: none;">waiting...</div>
+            <canvas id="avatar-canvas" width="300" height="300"></canvas>
+            <form id="customization-form"> <!-- 定制表单 -->
+                <label for="style">Style:</label> <!-- 样式标签 -->
+                <select id="style" name="style"> <!-- 样式选择框 -->
+                    <option value="realistic">现实</option> <!-- 现实风格选项 -->
+                    <option value="cartoon">卡通</option> <!-- 卡通风格选项 -->
+                    <option value="cute">可爱</option> <!-- 可爱风格选项 -->
+                    <option value="funny">搞怪</option> <!-- 搞怪风格选项 -->
+                    <option value="ancient">古风</option> <!-- 古风风格选项 -->
+                    <option value="fresh">小清新</option> <!-- 小清新风格选项 -->
+                    <option value="sci-fi">科幻</option> <!-- 科幻风格选项 -->
+                    <option value="fantasy">奇幻</option> <!-- 奇幻风格选项 -->
+                    <option value="none">无</option> 
+                </select>
+                
+                <label for="prompt">Prompt:</label> <!-- Prompt标签 -->
+                <textarea id="prompt" name="prompt" placeholder="Enter positive description..."></textarea> <!-- Prompt文本区域 -->
+    
+                <label for="negative_prompt">Negative Prompt:</label> <!-- Negative Prompt标签 -->
+                <textarea id="negative_prompt" name="negative_prompt" placeholder="Enter negative description..."></textarea> <!-- Negative Prompt文本区域 -->
+                <button type="submit">Generate Avatar</button> <!-- 提交按钮，用于生成头像 -->
+            </form>
+             <!-- 用于显示错误信息的列表 -->
+        <ul id="chat-messages" style="color: red;"></ul> 
+        
+        </section>
+         <!-- 添加喜欢和不喜欢，和清空的按钮 -->
+         <div class="button-container">
+            <button id="like-button">Like</button>
+            <button id="dislike-button">Dislike</button>
+            <button id="reset-preferences-button">Reset Preferences</button>
+
+        </div>
+        <div id="count-containers">
+            <span>Likes: <span id="like-count">0</span></span>
+            <span>Dislikes: <span id="dislike-count">0</span></span>
+        </div>
+       <!-- 添加一个输入框和一个刷新按钮 -->
+<div class="tab" id="seed-tab">
+    <label for="seed-range">Seed:</label>
+    <input type="number" id="seed-range" name="seed-range" min="1" max="1000000000" value="4">
+    <span id="seed-value">4</span>
+    <button id="refresh-seed-button">Refresh Seed</button>
+<!-- 在这里添加新的按钮 -->
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script> <!-- 引入JavaScript脚本 -->
+</body>
+</html>
